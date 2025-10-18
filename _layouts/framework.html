@@ -2,14 +2,30 @@
 layout: default
 ---
 
+{% if page.banner %}
+  <header style="
+    background-image: url('{{ page.banner }}');
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2em;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+    margin-bottom: 2rem;
+  ">
+    <h1>{{ page.title }}</h1>
+  </header>
+{% endif %}
+
 <div class="framework">
   <section class="main">
-
      {{ content }}
-
   </section>
   <section class="sidebar" style="margin-left: 15px;">
-    <!-- Get sidebar items -->
     {%- if page.sidebar -%}
       {%- assign sidebar = page.sidebar -%}
     {%- elsif site.defaults[page.layout].sidebar -%}
@@ -19,17 +35,13 @@ layout: default
     {%- endif -%}
 
     {%- for item in sidebar -%}
-
       {%- assign file = item -%}
       {%- assign array = file | split: '.' -%}
       {%- if array.size == 1 -%}
         {%- assign file = file | append: '.html' -%}
       {%- endif -%}
-
       {%- assign file = 'sidebar/' | append: file -%}
-
       {%- include {{ file }} %}
-
     {%- endfor -%}
   </section>
 </div>
