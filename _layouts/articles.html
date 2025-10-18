@@ -3,12 +3,27 @@ layout: framework
 sidebar: category-list
 ---
 
+{% if page.banner %}
+  <div class="banner" style="
+    background-image: url('{{ page.banner }}');
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2em;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  ">
+    {% if page.title %}
+      <h1>{{ page.title }}</h1>
+    {% endif %}
+  </div>
+{% endif %}
+
 <div class="articles">
-  {% if page.banner == nil %}
-    {% assign banner = page.title %}
-  {% endif %}
-
   {{ content }}
-
   {% include views/pagination.html %}
 </div>
